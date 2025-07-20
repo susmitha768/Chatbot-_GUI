@@ -1,0 +1,49 @@
+import tkinter as tk
+from tkinter import scrolledtext
+import datetime
+import random
+
+# Random greetings and fallback replies
+greetings = ["Hi there!", "Hello!", "Hey!", "Hi! How can I help you?"]
+fallbacks = ["I'm not sure I understand 🤔", "Can you rephrase that?", "Sorry, I don't know that yet."]
+
+# Chatbot logic
+def get_response(user_input):
+    user_input = user_input.lower()
+
+    if any(greet in user_input for greet in ["hi", "hello", "hey"]):
+        return random.choice(greetings)
+
+    elif "name" in user_input:
+        return "My name is PyBot 2.0!"
+
+    elif "time" in user_input or "clock" in user_input:
+        now = datetime.datetime.now()
+        return f"It's {now.strftime('%H:%M')} right now."
+
+    elif "date" in user_input:
+        today = datetime.date.today()
+        return f"Today's date is {today.strftime('%B %d, %Y')}."
+
+    elif "weather" in user_input:
+        return "I can't check the live weather yet, but it's always sunny in code world ☀️"
+
+    elif "creator" in user_input or "who made you" in user_input:
+        return "I was created by Susmitha using Python and Tkinter!"
+
+    elif "thank" in user_input:
+        return "You're welcome! 😊"
+
+    elif "bye" in user_input:
+        return "Goodbye! Chat with you later 👋"
+
+    else:
+        return random.choice(fallbacks)
+
+# Handle button click or enter key
+def chat(event=None):
+    user_input = entry.get()
+    if user_input.strip() == "":
+        return
+
+    chat_area.insert(tk.END, f"You: {user_input}
